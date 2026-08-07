@@ -11,11 +11,19 @@ const sql = mysql.createPool({
     password: "senhaAlunos"
 })
 
-app.get("/", (request, response) =>{
-    response.json({
-        message: "servidor rodando projeto filmes"
+app.get("/todos-filmes", (request, response) =>{
+    const selectCommand = "SELECT * FROM filmes_GeovannaOliveira"
+
+    sql.query(selectCommand, (error, data) => {
+        if(error){
+            console.log(error)
+            return
+        }
+        response.json(data)
     })
-})
+    })
+
+
 
 app.post("/create-filmes", (request, response) => {
     const { title, genre, duration, age_rating } = request.body
@@ -51,6 +59,40 @@ app.delete("/delete-filmes/:id", (request, response) => {
     });
 });
 
+// atualizar tarefas
+app.put("/update-filmes/:id", (request, response) => {
+
+    const { id } = request.params;
+    const { title, genre, duration, age_rating } = request.body;
+
+    const updateCommand = `
+        UPDATE filmes_GeovannaOliveira
+        SET
+            title = ?,
+            genre = ?,
+            duration = ?,
+            age_rating = ?
+        WHERE id = ?
+    `;
+
+    sql.query(
+        updateCommand,
+        [title, genre, duration, age_rating, id],
+        (error) => {
+
+            if (error) {
+                console.log(error);
+                return;
+            }
+
+            response.json({
+                message: "Informações atualizadas com sucesso!"
+            });
+
+        }
+    );
+
+});
 app.listen(3000, () => {
     console.log("Servidor rodando na porta 3000")
 })

@@ -1,6 +1,7 @@
-GET http://localhost:3000/
+GET http://localhost:3000/todos-filmes
 ###
 
+###
 POST http://localhost:3000/create-filmes
 Content-Type: application/json
 
@@ -13,3 +14,14 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/delete-filmes/3
+
+###
+PUT http://localhost:3000/update-filmes/1
+Content-Type: application/json
+
+{
+    "title": "Shrek 2",
+    "genre": "Animação",
+    "duration": 93,
+    "age_rating": "Livre"
+}
