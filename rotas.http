@@ -10,3 +10,6 @@ Content-Type: application/json
     "duration": 152,
     "age_rating": "Livre"
 }
+
+###
+DELETE http://localhost:3000/delete-filmes/3

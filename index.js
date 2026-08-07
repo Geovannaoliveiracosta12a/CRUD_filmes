@@ -34,6 +34,23 @@ app.post("/create-filmes", (request, response) => {
     });
 });
 
+app.delete("/delete-filmes/:id", (request, response) => {
+    const { id } = request.params
+
+    const deleteCommand = "DELETE FROM filmes_GeovannaOliveira WHERE id = ?"
+
+    sql.query(deleteCommand, [id], (error) => {
+        if(error){
+            console.log(error)
+            return
+        }
+
+        response.status(200).json({
+            message: "Filme deletado com sucesso!"
+        })
+    });
+});
+
 app.listen(3000, () => {
     console.log("Servidor rodando na porta 3000")
 })
