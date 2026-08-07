@@ -1,0 +1,12 @@
+GET http://localhost:3000/
+###
+
+POST http://localhost:3000/create-filmes
+Content-Type: application/json
+
+{
+    "title": "Alice no país das maravilhas",
+    "genre": "Fantasia",
+    "duration": 152,
+    "age_rating": "Livre"
+}
