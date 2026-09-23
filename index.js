@@ -1,7 +1,10 @@
 import express from 'express';
 import mysql from 'mysql2';
+import cors from 'cors';
 
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 
 const sql = mysql.createPool({
@@ -9,7 +12,7 @@ const sql = mysql.createPool({
     database: "alunos_filmes03TA",
     user: "alunos",
     password: "senhaAlunos"
-})
+});
 
 app.get("/todos-filmes", (request, response) =>{
     const selectCommand = "SELECT * FROM filmes_GeovannaOliveira"
